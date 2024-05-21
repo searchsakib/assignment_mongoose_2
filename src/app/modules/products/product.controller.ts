@@ -9,9 +9,6 @@ const addProduct = async (req: Request, res: Response) => {
     success: true,
     message: 'Product created successfully!',
   });
-
-  // console.log(req.body);
-  // res.send('hi,hello');
 };
 
 export const productControllers = {
