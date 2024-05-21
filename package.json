@@ -4,7 +4,10 @@
   "description": "**Objective:** Develop a Express application with TypeScript as the programming language, integrating MongoDB with Mongoose for effective data management. Ensure data integrity through validation using Joi/Zod.",
   "main": "./dist/server.js",
   "scripts": {
+    "start:prod": "node ./dist/server.js",
     "start:dev": "ts-node-dev --respawn --transpile-only ./src/server.ts",
+    "lint": "npx eslint .",
+    "lint:fix": "npx eslint . --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
