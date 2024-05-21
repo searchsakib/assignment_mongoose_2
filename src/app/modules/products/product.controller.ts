@@ -38,7 +38,7 @@ const getAllProducts = async (req: Request, res: Response) => {
       if (result?.length !== 0) {
         res.status(200).json({
           success: true,
-          message: 'Products fetched successfully!',
+          message: `Products matching search term '${query}' fetched successfully!`,
           data: result,
         });
       } else {
