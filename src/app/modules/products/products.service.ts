@@ -1,3 +1,4 @@
+// import { Types } from 'mongoose';
 import { TProduct } from './products.interface';
 import { products } from './products.model';
 
@@ -11,5 +12,5 @@ const addProductToDB = async (productData: TProduct) => {
 };
 
 export const porductServices = {
-  addProduct: addProductToDB,
+  addProductToDB,
 };

@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-const variantSchema = z.object({
+const variantZodSchema = z.object({
   type: z
     .string()
     .min(1, { message: 'Variant type is required' })
@@ -10,7 +10,7 @@ const variantSchema = z.object({
   value: z.string().min(1, { message: 'Variant value is required' }),
 });
 
-const inventorySchema = z.object({
+const inventoryZodSchema = z.object({
   quantity: z
     .number()
     .min(0, { message: 'Quantity must be a non-neagative number' })
@@ -19,7 +19,7 @@ const inventorySchema = z.object({
   inStock: z.boolean({ message: 'inStock status is required' }),
 });
 
-const productValidationSchema = z.object({
+const productValidationZodSchema = z.object({
   name: z.string().min(1, { message: 'Product name is required' }).trim(),
   description: z
     .string()
@@ -37,9 +37,9 @@ const productValidationSchema = z.object({
     )
     .min(1, { message: 'Product tags are required' }),
   variants: z
-    .array(variantSchema)
+    .array(variantZodSchema)
     .min(1, { message: 'Product variants are required' }),
-  inventory: inventorySchema,
+  inventory: inventoryZodSchema,
 });
 
-export default productValidationSchema;
+export default productValidationZodSchema;
