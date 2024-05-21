@@ -2,12 +2,13 @@
 import { TProduct } from './products.interface';
 import { products } from './products.model';
 
+//adding product
 const addProductToDB = async (productData: TProduct) => {
   try {
     const result = await products.create(productData);
     return result;
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    throw new Error('Failed to add product to database');
   }
 };
 
@@ -42,7 +43,7 @@ const getSingleProductFromDB = async (id: string) => {
     console.log(result);
     return result;
   } catch (error) {
-    console.log(error);
+    throw new Error('Product not found');
   }
 };
 

@@ -11,20 +11,19 @@ const addProduct = async (req: Request, res: Response) => {
     const result = await porductServices.addProductToDB(validatedWithZodData);
 
     if (result) {
-      console.log(result);
       res.status(200).json({
         success: true,
         message: 'Product created successfully!',
         data: result,
       });
     } else {
-      throw new Error('Something went very wrong');
+      throw new Error('Failed to add product');
     }
   } catch (error: any) {
     res.status(500).json({
       success: false,
-      message: 'Something went wrong!!',
-      error: error.message,
+      message: 'Failed to add product!',
+      error: error.issues[0].message,
     });
   }
 };
@@ -67,7 +66,7 @@ const getAllProducts = async (req: Request, res: Response) => {
     res.status(500).json({
       success: false,
       message: 'Something went wrong !!',
-      error: error.message,
+      error: error?.issues[0]?.message,
     });
   }
 };
@@ -85,13 +84,13 @@ const getSingleProduct = async (req: Request, res: Response) => {
         data: result,
       });
     } else {
-      throw new Error('Something Wrong!!');
+      throw new Error('Something Went Wrong!!');
     }
   } catch (error: any) {
     res.status(500).json({
       success: false,
       message: 'Products failed to fetch with provided id!',
-      error: error.message,
+      error: error?.message,
     });
   }
 };
@@ -123,7 +122,7 @@ const updateSingleProduct = async (req: Request, res: Response) => {
     res.status(500).json({
       success: false,
       message: 'Something went wrong!',
-      error: error.message,
+      error: error?.message,
     });
   }
 };
@@ -151,7 +150,7 @@ const deleteSingleProduct = async (req: Request, res: Response) => {
     res.status(500).json({
       success: false,
       message: 'Something went wrong!!',
-      error: error.message,
+      error: error?.message,
     });
   }
 };
