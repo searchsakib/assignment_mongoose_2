@@ -1,16 +1,19 @@
 import mongoose from 'mongoose';
 import app from './app';
+import config from './config';
 
 async function main() {
-  await mongoose.connect(
-    'mongodb+srv://ecommerce:Sx4nUNpOJtbz1GEz@atlascluster.j32tjfb.mongodb.net/?retryWrites=true&w=majority&appName=AtlasCluster'
-  );
+  try {
+    // console.log(process.env.DB_URL);
 
-  const port = 5000;
+    await mongoose.connect(config.db_url as string);
 
-  app.listen(port, () => {
-    console.log(`listening on port ${port}`);
-  });
+    app.listen(config.port, () => {
+      console.log(`listening on port ${config.port}`);
+    });
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 main();
