@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { products } from '../products/products.model';
 import { orderService } from './orders.service';
 import orderValidationZodSchema from './orders.validation';
+import { ZodError } from 'zod';
 
 const createOrder = async (req: Request, res: Response) => {
   try {
@@ -29,6 +30,13 @@ const createOrder = async (req: Request, res: Response) => {
       });
     }
   } catch (error) {
+    if (error instanceof ZodError) {
+      const errorMessage = error.errors.map((err) => err.message).join(', ');
+      return res.status(400).json({
+        success: false,
+        message: errorMessage,
+      });
+    }
     res.status(500).json({
       success: false,
       message: 'Order creation failed!',
