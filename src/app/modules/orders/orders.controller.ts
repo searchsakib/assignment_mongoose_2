@@ -13,15 +13,12 @@ const createOrder = async (req: Request, res: Response) => {
     if (!product) {
       return res.status(404).json({
         success: false,
-        message: 'Product not found',
+        message: 'Order not found',
       });
-    } else if (
-      !product?.inventory?.inStock ||
-      product.inventory.quantity < validatedWithZodData.quantity
-    ) {
+    } else if (!product?.inventory?.inStock) {
       return res.status(400).json({
         success: false,
-        message: 'Insufficient quantity in inventory',
+        message: 'Insufficient quantity available in inventory',
       });
     } else {
       const result = await orderService.createOrderFromDB(validatedWithZodData);

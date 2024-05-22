@@ -16,4 +16,12 @@ app.get('/', (req: Request, res: Response) => {
 app.use('/api/products', productRouter);
 app.use('/api/orders', orderRouter);
 
+// Not Found Route for all methods - Should be the last route definition
+app.all('*', (req: Request, res: Response) => {
+  res.status(404).json({
+    success: false,
+    message: 'Route not found',
+  });
+});
+
 export default app;
