@@ -9,7 +9,7 @@ const inventoryZodSchema = zod_1.z.object({
     quantity: zod_1.z
         .number()
         .int()
-        .positive({ message: 'Quantity can not be negative or zero' }),
+        .positive({ message: 'Quantity must be a positive number' }),
     inStock: zod_1.z.boolean({ message: 'inStock status is required' }),
 });
 const productValidationZodSchema = zod_1.z.object({
@@ -20,7 +20,7 @@ const productValidationZodSchema = zod_1.z.object({
         .trim(),
     price: zod_1.z
         .number()
-        .positive({ message: 'Product price can not be negative or zero' }),
+        .positive({ message: 'Product price must be a positive number' }),
     category: zod_1.z
         .string()
         .min(1, { message: 'Product category is required' })
