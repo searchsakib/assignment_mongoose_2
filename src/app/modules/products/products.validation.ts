@@ -17,7 +17,9 @@ const productValidationZodSchema = z.object({
     .string()
     .min(1, { message: 'Product description is required' })
     .trim(),
-  price: z.number().positive({ message: 'Product price can not be zero' }),
+  price: z
+    .number()
+    .positive({ message: 'Product price can not be negative or zero' }),
   category: z
     .string()
     .min(1, { message: 'Product category is required' })
