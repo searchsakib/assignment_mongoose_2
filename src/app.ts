@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(cors());
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('Hello Whiteness');
+  res.send('Welcome to the product management app');
 });
 
 // app routes
