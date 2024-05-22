@@ -16,6 +16,7 @@ exports.orderController = void 0;
 const products_model_1 = require("../products/products.model");
 const orders_service_1 = require("./orders.service");
 const orders_validation_1 = __importDefault(require("./orders.validation"));
+const zod_1 = require("zod");
 const createOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     try {
@@ -44,6 +45,13 @@ const createOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         }
     }
     catch (error) {
+        if (error instanceof zod_1.ZodError) {
+            const errorMessage = error.errors.map((err) => err.message).join(', ');
+            return res.status(400).json({
+                success: false,
+                message: errorMessage,
+            });
+        }
         res.status(500).json({
             success: false,
             message: 'Order creation failed!',
