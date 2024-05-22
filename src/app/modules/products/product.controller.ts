@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { Types } from 'mongoose';
 import { porductServices } from './products.service';
 import productValidationZodSchema from './products.validation';
+import { ZodError } from 'zod';
 
 // adding a product
 const addProduct = async (req: Request, res: Response) => {
@@ -20,11 +21,19 @@ const addProduct = async (req: Request, res: Response) => {
       throw new Error('Failed to add product');
     }
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: 'Failed to add product!',
-      error: error,
-    });
+    if (error instanceof ZodError) {
+      const errorMessage = error.errors.map((err) => err.message).join(', ');
+      res.status(400).json({
+        success: false,
+        message: errorMessage,
+      });
+    } else {
+      res.status(500).json({
+        success: false,
+        message: 'Failed to add product!',
+        error: error,
+      });
+    }
   }
 };
 
@@ -119,11 +128,20 @@ const updateSingleProduct = async (req: Request, res: Response) => {
       });
     }
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: 'Something went wrong!',
-      error: error,
-    });
+    if (error instanceof ZodError) {
+      const errorMessage = error.errors.map((err) => err.message).join(', ');
+      res.status(400).json({
+        success: false,
+        message: errorMessage,
+        // Zod-specific error details
+      });
+    } else {
+      res.status(500).json({
+        success: false,
+        message: 'Something went wrong!',
+        error: error,
+      });
+    }
   }
 };
 

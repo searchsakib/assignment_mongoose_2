@@ -16,6 +16,7 @@ exports.productControllers = void 0;
 const mongoose_1 = require("mongoose");
 const products_service_1 = require("./products.service");
 const products_validation_1 = __importDefault(require("./products.validation"));
+const zod_1 = require("zod");
 // adding a product
 const addProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -34,11 +35,20 @@ const addProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         }
     }
     catch (error) {
-        res.status(500).json({
-            success: false,
-            message: 'Failed to add product!',
-            error: error,
-        });
+        if (error instanceof zod_1.ZodError) {
+            const errorMessage = error.errors.map((err) => err.message).join(', ');
+            res.status(400).json({
+                success: false,
+                message: errorMessage,
+            });
+        }
+        else {
+            res.status(500).json({
+                success: false,
+                message: 'Failed to add product!',
+                error: error,
+            });
+        }
     }
 });
 // getting all products and getting serch results
@@ -135,11 +145,21 @@ const updateSingleProduct = (req, res) => __awaiter(void 0, void 0, void 0, func
         }
     }
     catch (error) {
-        res.status(500).json({
-            success: false,
-            message: 'Something went wrong!',
-            error: error,
-        });
+        if (error instanceof zod_1.ZodError) {
+            const errorMessage = error.errors.map((err) => err.message).join(', ');
+            res.status(400).json({
+                success: false,
+                message: errorMessage,
+                // Zod-specific error details
+            });
+        }
+        else {
+            res.status(500).json({
+                success: false,
+                message: 'Something went wrong!',
+                error: error,
+            });
+        }
     }
 });
 // delete single product
