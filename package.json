@@ -1,11 +1,12 @@
 {
-  "name": "batch-3-assignment-2",
+  "name": "ecommerce-backend",
   "version": "1.0.0",
   "description": "**Objective:** Develop a Express application with TypeScript as the programming language, integrating MongoDB with Mongoose for effective data management. Ensure data integrity through validation using Joi/Zod.",
   "main": "./dist/server.js",
   "scripts": {
     "start:prod": "node ./dist/server.js",
     "start:dev": "ts-node-dev --respawn --transpile-only ./src/server.ts",
+    "build": "tsc",
     "lint": "npx eslint .",
     "lint:fix": "npx eslint . --fix",
     "prettier": "prettier --ignore-path .gitignore --write \"./src/**/*.+(js|ts|json)\"",

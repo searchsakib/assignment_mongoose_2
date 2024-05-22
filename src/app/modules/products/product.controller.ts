@@ -19,11 +19,11 @@ const addProduct = async (req: Request, res: Response) => {
     } else {
       throw new Error('Failed to add product');
     }
-  } catch (error: any) {
+  } catch (error) {
     res.status(500).json({
       success: false,
       message: 'Failed to add product!',
-      error: error.issues[0].message,
+      error: error,
     });
   }
 };
@@ -62,11 +62,11 @@ const getAllProducts = async (req: Request, res: Response) => {
         });
       }
     }
-  } catch (error: any) {
+  } catch (error) {
     res.status(500).json({
       success: false,
       message: 'Something went wrong !!',
-      error: error?.issues[0]?.message,
+      error: error,
     });
   }
 };
@@ -86,11 +86,11 @@ const getSingleProduct = async (req: Request, res: Response) => {
     } else {
       throw new Error('Something Went Wrong!!');
     }
-  } catch (error: any) {
+  } catch (error) {
     res.status(500).json({
       success: false,
       message: 'Products failed to fetch with provided id!',
-      error: error?.message,
+      error: error,
     });
   }
 };
@@ -118,11 +118,11 @@ const updateSingleProduct = async (req: Request, res: Response) => {
         message: 'Product not found or update unsuccessful!',
       });
     }
-  } catch (error: any) {
+  } catch (error) {
     res.status(500).json({
       success: false,
       message: 'Something went wrong!',
-      error: error?.message,
+      error: error,
     });
   }
 };
@@ -146,11 +146,11 @@ const deleteSingleProduct = async (req: Request, res: Response) => {
         message: 'Product not found!',
       });
     }
-  } catch (error: any) {
+  } catch (error) {
     res.status(500).json({
       success: false,
       message: 'Something went wrong!!',
-      error: error?.message,
+      error: error,
     });
   }
 };
