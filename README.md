@@ -35,6 +35,10 @@ The server will start running on the port specified in the `.env` file (default 
 
 The server will start running on the port specified in the `.env` file (default is 3000).
 
+## Live Server
+
+https://assignment-mongoose-2-github.vercel.app/
+
 ## API Endpoints
 
 ### Product Endpoints
