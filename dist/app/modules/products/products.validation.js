@@ -6,7 +6,10 @@ const variantZodSchema = zod_1.z.object({
     value: zod_1.z.string().min(1, { message: 'Variant value is required' }),
 });
 const inventoryZodSchema = zod_1.z.object({
-    quantity: zod_1.z.number().int().positive({ message: 'Quantity can not be zero' }),
+    quantity: zod_1.z
+        .number()
+        .int()
+        .positive({ message: 'Quantity can not be negative or zero' }),
     inStock: zod_1.z.boolean({ message: 'inStock status is required' }),
 });
 const productValidationZodSchema = zod_1.z.object({

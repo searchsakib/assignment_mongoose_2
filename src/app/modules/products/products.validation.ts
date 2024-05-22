@@ -7,7 +7,10 @@ const variantZodSchema = z.object({
 });
 
 const inventoryZodSchema = z.object({
-  quantity: z.number().int().positive({ message: 'Quantity can not be zero' }),
+  quantity: z
+    .number()
+    .int()
+    .positive({ message: 'Quantity can not be negative or zero' }),
   inStock: z.boolean({ message: 'inStock status is required' }),
 });
 
