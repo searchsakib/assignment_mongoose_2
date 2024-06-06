@@ -39,7 +39,7 @@ const createOrder = async (req: Request, res: Response) => {
     }
     res.status(500).json({
       success: false,
-      message: 'Order creation failed!',
+      message: 'Insufficient quantity available in inventory',
       error: error,
     });
   }
